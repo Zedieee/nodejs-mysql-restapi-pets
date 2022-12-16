@@ -2,11 +2,13 @@ import express from "express";
 import petsRoutes from "./routes/pets.routes.js";
 import indexRoutes from "./routes/index.routes.js";
 import './config.js'
-
+import cors from 'cors'
 
 const app = express();
 
 app.use(express.json());
+const corss = cors();
+app.use(corss);
 
 app.use(indexRoutes);
 app.use("/api", petsRoutes);
