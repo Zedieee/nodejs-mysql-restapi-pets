@@ -33,14 +33,16 @@ try {
 }
 
 export const createPet = async (req, res) => {
-    const { name, age } = req.body;
+    const { name, age,image,description } = req.body;
 try {
-    const [rows] = await pool.query('INSERT INTO pets(name, age) VALUES (?,?)', [name, age]);
+    const [rows] = await pool.query('INSERT INTO pets(name, age,image,description) VALUES (?,?,?,?)', [name, age,image,description]);
     
     res.send({
         id: rows.insertId,
         name,
-        age
+        age,
+        image,
+        description
     });
 } catch (error) {
     return res.status(500).json({
@@ -52,9 +54,9 @@ try {
 
 export const updatePet = async (req, res) => {
     const {id} = req.params;
-    const {name, age} = req.body;
+    const {name, age,image,description} = req.body;
 try {
-   const [result] = await pool.query('UPDATE pets SET name = IFNULL(?, name), age= IFNULL(?, age) WHERE id = ?', [name, age, id]);
+   const [result] = await pool.query('UPDATE pets SET name = IFNULL(?, name), age= IFNULL(?, age), image_pet=IFNULL(?,image), description=IFNULL(?,description) WHERE id = ?', [name, age,image,description, id]);
     if(result.affectedRows === 0) return res.status(404).send({
         message: "No se encontró el pet"
     });
