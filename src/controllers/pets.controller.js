@@ -41,13 +41,13 @@ try {
         id: rows.insertId,
         name,
         age,
-        image,
+        image_pet,
         description
     });
 } catch (error) {
     return res.status(500).json({
         message: "Error al crear el pet",
-        error
+        error 
     });
 }
 }
