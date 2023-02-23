@@ -11,7 +11,7 @@ const cache = apicache.middleware;
 app.use(express.json());
 const corss = cors();
 app.use(corss);
-app.use(cache("2 minutes"));
+app.use(cache("30 minutes"));
 app.use(indexRoutes);
 app.use("/api", petsRoutes);
 app.use((req, res, next) => {
